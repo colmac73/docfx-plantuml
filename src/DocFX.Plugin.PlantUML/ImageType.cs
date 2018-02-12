@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace docfx_plantuml
+namespace DocFX.Plugin.PlantUML
 {
     public enum RenderFormat
     {

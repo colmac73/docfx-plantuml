@@ -1,19 +1,20 @@
 ﻿using Microsoft.DocAsCode.Plugins;
+using Microsoft.DocAsCode.Utility;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.Immutable;
 using System.Composition;
 using System.IO;
+using System.Linq;
+using System.Web;
+using System.Xml.Linq;
 
-namespace docfx_plantuml
+namespace DocFX.Plugin.PlantUML
 {
     [Export(typeof(IDocumentProcessor))]
     public class PlantUMLDocumentProcessor : IDocumentProcessor
     {
-        public string Name => throw new NotImplementedException();
+        public string Name => nameof(PlantUMLDocumentProcessor);
 
         public IEnumerable<IDocumentBuildStep> BuildSteps => throw new NotImplementedException();
 
@@ -32,13 +33,23 @@ namespace docfx_plantuml
 
         public FileModel Load(FileAndType file, ImmutableDictionary<string, object> metadata)
         {
+            var content = new Dictionary<string, object>
+            {
+                ["conceptual"] = File.ReadAllText(Path.Combine(file.BaseDir, file.File)),
+                ["type"] = "Conceptual",
+                ["path"] = file.File
+            };
 
-            throw new NotImplementedException();
+            return new FileModel(file, content);
         }
 
         public SaveResult Save(FileModel model)
         {
-            throw new NotImplementedException();
+            return new SaveResult
+            {
+                DocumentType = "Conceptual",
+                ResourceFile = model.File
+            };
         }
 
         public void UpdateHref(FileModel model, IDocumentBuildContext context)

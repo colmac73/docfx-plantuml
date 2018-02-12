@@ -3,16 +3,31 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace docfx_plantuml
+namespace DocFX.Plugin.PlantUML
 {
     public class PlantUMLConverter : IPlantUMLConverter
     {
         private static HttpClient _client = new HttpClient();
         private string pathTemplate = "plantuml/{0}/{1}";
 
+        public PlantUMLConverter() : this("https://www.plantuml.com/") { }
+
         public PlantUMLConverter(string baseUri)
         {
             _client.BaseAddress = new Uri(baseUri);
+        }
+
+        public string ConvertToString(string plantUML, RenderFormat type)
+        {
+            Task<Stream> response = this.ConvertToImage(plantUML, type);
+
+            string result;
+            using (var reader = new StreamReader(response.Result))
+            {
+                result = reader.ReadToEnd();
+            }
+
+            return result;
         }
 
         public async Task<Stream> ConvertToImage(string plantUML, RenderFormat type)

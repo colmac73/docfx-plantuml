@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace docfx_plantuml
+namespace DocFX.Plugin.PlantUML
 {
     interface IPlantUMLConverter
     {

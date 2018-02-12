@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using docfx_plantuml;
+using DocFX.Plugin.PlantUML;
 using System.Text;
 
 namespace DocFX.Plugin.PlantUML.Test

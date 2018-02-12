@@ -2,7 +2,7 @@
 using System.IO;
 using System.IO.Compression;
 
-namespace docfx_plantuml
+namespace DocFX.Plugin.PlantUML
 {
     public static class PlantUMLEncoder
     {
@@ -13,7 +13,8 @@ namespace docfx_plantuml
         /// <returns></returns>
         public static string EncodePlantUML(this string plantUML)
         {
-            // TODO: Remove @startuml and @enduml tags if they exist
+            // Remove @startuml and @enduml tags if they exist
+            plantUML = plantUML.Trim().Replace("@startuml", string.Empty).Replace("@enduml", string.Empty);                
 
             // Strip out \r and any newline at end of string
             plantUML = plantUML.Replace("\r\n", "\n").TrimEnd('\n');

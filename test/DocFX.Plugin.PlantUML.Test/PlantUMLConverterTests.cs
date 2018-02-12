@@ -1,5 +1,4 @@
-﻿using docfx_plantuml;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Svg;
 using System.Drawing;
 using System.Drawing.Imaging;
